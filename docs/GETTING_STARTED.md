@@ -14,7 +14,37 @@ Before you begin, ensure you have the following installed:
 
 ## Quick Start
 
-*Note: The quick start setup will be available after the Docker configuration is added.*
+### Start Services
+```bash
+# Clone the repository
+git clone 
+cd log-indexer
+
+# Start all services
+make up
+```
+
+Wait about 30 seconds for services to start and become healthy.
+
+### Verify Setup
+```bash
+# Check OpenSearch
+curl http://localhost:9200/_cluster/health
+
+# Or run the test script
+./scripts/test-opensearch.sh
+```
+
+### Access OpenSearch Dashboards
+
+1. Open http://localhost:5601 in your browser
+2. Click "Explore on my own"
+3. You're now ready to visualize logs (after the API is added)
+
+### Stop Services
+```bash
+make down
+```
 
 ## Accessing Services
 

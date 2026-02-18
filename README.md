@@ -38,14 +38,23 @@ Log Indexer is a comprehensive solution for collecting, storing, and searching l
 
 ### Running Locally
 ```bash
-# Clone the repository
-git clone <your-repo-url>
-cd log-indexer
+# Start services
+make up
 
-# Start services (coming soon)
-cd docker
-docker-compose up -d
+# Check status
+make status
+
+# View logs
+make logs
+
+# Stop services
+make down
 ```
+Access the services:
+- **OpenSearch**: http://localhost:9200
+- **OpenSearch Dashboards**: http://localhost:5601
+
+For detailed Docker setup instructions, see [docker/README.md](docker/README.md).
 
 ## Project Structure
 ```
