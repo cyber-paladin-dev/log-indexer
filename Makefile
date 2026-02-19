@@ -1,4 +1,4 @@
-.PHONY: help up down logs restart status clean
+.PHONY: help up down logs restart status clean test-api generate-logs api-logs
 
 help:
 	@echo "Log Indexer - Available commands:"
@@ -41,3 +41,14 @@ clean:
 	if [[ $$REPLY =~ ^[Yy]$$ ]]; then \
 		cd docker && docker-compose down -v; \
 	fi
+
+test-api:
+	@echo "Testing API..."
+	./scripts/test-api.sh
+
+generate-logs:
+	@echo "Starting log generator..."
+	python3 scripts/generate-logs.py
+
+api-logs:
+	cd docker && docker-compose logs -f api
