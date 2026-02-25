@@ -1,13 +1,12 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: log-indexer-api
-spec:
-  replicas: 3 # High availability
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: opensearch
-spec:
-  replicas: 3 # Three nodes for production
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: log-indexer-api
+  spec:
+    replicas: 3 # High availability
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    name: opensearch
+  spec:
+    replicas: 3 # Three nodes for production

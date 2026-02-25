@@ -14,58 +14,58 @@ spec:
         app: opensearch
     spec:
       containers:
-      - name: opensearch
-        image: opensearchproject/opensearch:latest
-        ports:
-        - containerPort: 9200
-          name: http
-        - containerPort: 9600
-          name: performance
-        env:
-        - name: cluster.name
-          value: "opensearch-cluster"
-        - name: node.name
-          value: "opensearch-node1"
-        - name: discovery.type
-          value: "single-node"
-        - name: bootstrap.memory_lock
-          value: "true"
-        - name: OPENSEARCH_JAVA_OPTS
-          value: "-Xms512m -Xmx512m"
-        - name: DISABLE_INSTALL_DEMO_CONFIG
-          value: "true"
-        - name: DISABLE_SECURITY_PLUGIN
-          value: "true"
+        - name: opensearch
+          image: opensearchproject/opensearch:latest
+          ports:
+            - containerPort: 9200
+              name: http
+            - containerPort: 9600
+              name: performance
+          env:
+            - name: cluster.name
+              value: "opensearch-cluster"
+            - name: node.name
+              value: "opensearch-node1"
+            - name: discovery.type
+              value: "single-node"
+            - name: bootstrap.memory_lock
+              value: "true"
+            - name: OPENSEARCH_JAVA_OPTS
+              value: "-Xms512m -Xmx512m"
+            - name: DISABLE_INSTALL_DEMO_CONFIG
+              value: "true"
+            - name: DISABLE_SECURITY_PLUGIN
+              value: "true"
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          volumeMounts:
+            - name: opensearch-data
+              mountPath: /usr/share/opensearch/data
+          livenessProbe:
+            httpGet:
+              path: /_cluster/health
+              port: 9200
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /_cluster/health
+              port: 9200
+            initialDelaySeconds: 30
+            periodSeconds: 10
+  volumeClaimTemplates:
+    - metadata:
+        name: opensearch-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            memory: "1Gi"
-            cpu: "500m"
-          limits:
-            memory: "2Gi"
-            cpu: "1000m"
-        volumeMounts:
-        - name: opensearch-data
-          mountPath: /usr/share/opensearch/data
-        livenessProbe:
-          httpGet:
-            path: /_cluster/health
-            port: 9200
-          initialDelaySeconds: 60
-          periodSeconds: 30
-        readinessProbe:
-          httpGet:
-            path: /_cluster/health
-            port: 9200
-          initialDelaySeconds: 30
-          periodSeconds: 10
-  volumeClaimTemplates:
-  - metadata:
-      name: opensearch-data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 10Gi
+            storage: 10Gi
 ---
 apiVersion: v1
 kind: Service
@@ -75,10 +75,10 @@ spec:
   selector:
     app: opensearch
   ports:
-  - name: http
-    port: 9200
-    targetPort: 9200
-  - name: performance
-    port: 9600
-    targetPort: 9600
-  clusterIP: None  # Headless service for StatefulSet
+    - name: http
+      port: 9200
+      targetPort: 9200
+    - name: performance
+      port: 9600
+      targetPort: 9600
+  clusterIP: None # Headless service for StatefulSet

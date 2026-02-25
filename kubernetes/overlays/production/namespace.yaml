@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: log-indexer-production
+  labels:
+    app: log-indexer
+    environment: production
+    managed-by: kustomize

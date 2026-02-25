@@ -1,13 +1,13 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: log-indexer-api
-spec:
-  replicas: 2 # Moderate replicas for staging
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: opensearch
-spec:
-  replicas: 2 # Two nodes for staging
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: log-indexer-api
+  spec:
+    replicas: 2 # Moderate replicas for staging
+
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    name: opensearch
+  spec:
+    replicas: 2 # Two nodes for staging

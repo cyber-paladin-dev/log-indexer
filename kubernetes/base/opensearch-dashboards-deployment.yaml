@@ -13,35 +13,35 @@ spec:
         app: opensearch-dashboards
     spec:
       containers:
-      - name: opensearch-dashboards
-        image: opensearchproject/opensearch-dashboards:latest
-        ports:
-        - containerPort: 5601
-          name: http
-        env:
-        - name: OPENSEARCH_HOSTS
-          value: '["http://opensearch-service:9200"]'
-        - name: DISABLE_SECURITY_DASHBOARDS_PLUGIN
-          value: "true"
-        resources:
-          requests:
-            memory: "512Mi"
-            cpu: "250m"
-          limits:
-            memory: "1Gi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /api/status
-            port: 5601
-          initialDelaySeconds: 60
-          periodSeconds: 30
-        readinessProbe:
-          httpGet:
-            path: /api/status
-            port: 5601
-          initialDelaySeconds: 30
-          periodSeconds: 10
+        - name: opensearch-dashboards
+          image: opensearchproject/opensearch-dashboards:latest
+          ports:
+            - containerPort: 5601
+              name: http
+          env:
+            - name: OPENSEARCH_HOSTS
+              value: '["http://opensearch-service:9200"]'
+            - name: DISABLE_SECURITY_DASHBOARDS_PLUGIN
+              value: "true"
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /api/status
+              port: 5601
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /api/status
+              port: 5601
+            initialDelaySeconds: 30
+            periodSeconds: 10
 ---
 apiVersion: v1
 kind: Service
@@ -52,6 +52,6 @@ spec:
   selector:
     app: opensearch-dashboards
   ports:
-  - name: http
-    port: 5601
-    targetPort: 5601
+    - name: http
+      port: 5601
+      targetPort: 5601

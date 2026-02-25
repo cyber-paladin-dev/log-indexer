@@ -6,6 +6,9 @@ namespace: log-indexer-dev
 bases:
   - ../../base
 
+resources:
+  - namespace.yaml
+
 patchesStrategicMerge:
   - replica-patch.yaml
   - configmap-patch.yaml

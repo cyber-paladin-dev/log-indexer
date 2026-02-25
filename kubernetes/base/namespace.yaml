@@ -17,7 +17,7 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: log-indexer-prod
+  name: log-indexer-production
   labels:
     app: log-indexer
     environment: production

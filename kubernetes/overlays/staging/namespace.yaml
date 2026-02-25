@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: log-indexer-staging
+  labels:
+    app: log-indexer
+    environment: staging
+    managed-by: kustomize
