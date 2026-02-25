@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-indexer-config
+data:
+  OPENSEARCH_HOST: "opensearch-service"
+  OPENSEARCH_PORT: "9200"
+  API_PORT: "8000"
+  LOG_LEVEL: "INFO"
+  INDEX_NAME: "logs"

@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-indexer-config
+data:
+  LOG_LEVEL: "DEBUG" # More verbose logging in dev

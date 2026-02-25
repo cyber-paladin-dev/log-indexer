@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - opensearch-statefulset.yaml
+  - opensearch-dashboards-deployment.yaml
+  - api-deployment.yaml
+
+commonLabels:
+  app: log-indexer
+  managed-by: kustomize

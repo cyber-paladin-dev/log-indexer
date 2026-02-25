@@ -56,6 +56,26 @@ Access the services:
 
 For detailed Docker setup instructions, see [docker/README.md](docker/README.md).
 
+## Kubernetes Deployment
+
+Deploy to Kubernetes cluster:
+```bash
+# Deploy to dev environment
+make k8s-deploy-dev
+
+# Check status
+make k8s-status
+
+# Port forward to access services locally
+kubectl port-forward -n log-indexer-dev svc/log-indexer-api-service 8000:8000
+kubectl port-forward -n log-indexer-dev svc/opensearch-dashboards-service 5601:5601
+
+# View logs
+make k8s-logs
+```
+
+For detailed Kubernetes documentation, see [kubernetes/README.md](kubernetes/README.md).
+
 ## Project Structure
 ```
 log-indexer/

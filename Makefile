@@ -1,4 +1,4 @@
-.PHONY: help up down logs restart status clean test-api generate-logs api-logs
+.PHONY: help up down logs restart status clean test-api generate-logs api-logs k8s-deploy k8s-deploy-dev k8s-deploy-staging k8s-deploy-prod k8s-cleanup k8s-status k8s-logs
 
 help:
 	@echo "Log Indexer - Available commands:"
@@ -52,3 +52,28 @@ generate-logs:
 
 api-logs:
 	cd docker && docker-compose logs -f api
+
+# Kubernetes deployment
+k8s-deploy-dev:
+	@echo "Deploying to Kubernetes (dev)..."
+	./scripts/k8s-deploy.sh dev
+
+k8s-deploy-staging:
+	@echo "Deploying to Kubernetes (staging)..."
+	./scripts/k8s-deploy.sh staging
+
+k8s-deploy-prod:
+	@echo "Deploying to Kubernetes (production)..."
+	./scripts/k8s-deploy.sh production
+
+k8s-cleanup:
+	@echo "Cleaning up Kubernetes resources..."
+	./scripts/k8s-cleanup.sh $(ENV)
+
+k8s-status:
+	@echo "Kubernetes status (dev)..."
+	kubectl get all -n log-indexer-dev
+
+k8s-logs:
+	@echo "Following API logs (dev)..."
+	kubectl logs -f deployment/log-indexer-api -n log-indexer-dev
