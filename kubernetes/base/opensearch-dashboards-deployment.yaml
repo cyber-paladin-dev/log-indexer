@@ -6,11 +6,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: opensearch-dashboards
+      component: opensearch-dashboards
   template:
     metadata:
       labels:
         app: opensearch-dashboards
+        component: opensearch-dashboards
     spec:
       containers:
         - name: opensearch-dashboards
@@ -50,7 +51,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: opensearch-dashboards
+    component: opensearch-dashboards
   ports:
     - name: http
       port: 5601
