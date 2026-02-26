@@ -1,4 +1,4 @@
-.PHONY: help up down logs restart status clean test-api generate-logs api-logs k8s-deploy k8s-deploy-dev k8s-deploy-staging k8s-deploy-prod k8s-cleanup k8s-status k8s-logs
+.PHONY: help up down logs restart status clean test-api generate-logs api-logs k8s-deploy k8s-deploy-dev k8s-deploy-staging k8s-deploy-prod k8s-cleanup k8s-status k8s-logs tf-init tf-plan tf-apply tf-destroy tf-output
 
 help:
 	@echo "Log Indexer - Available commands:"
@@ -77,3 +77,24 @@ k8s-status:
 k8s-logs:
 	@echo "Following API logs (dev)..."
 	kubectl logs -f deployment/log-indexer-api -n log-indexer-dev
+
+# Terraform commands
+tf-init:
+	@echo "Initializing Terraform..."
+	cd infrastructure/terraform/environments/dev && terraform init
+
+tf-plan:
+	@echo "Planning Terraform changes..."
+	cd infrastructure/terraform/environments/dev && terraform plan
+
+tf-apply:
+	@echo "Applying Terraform..."
+	./scripts/terraform-apply.sh dev
+
+tf-destroy:
+	@echo "Destroying Terraform resources..."
+	./scripts/terraform-destroy.sh dev
+
+tf-output:
+	@echo "Terraform outputs:"
+	cd infrastructure/terraform/environments/dev && terraform output

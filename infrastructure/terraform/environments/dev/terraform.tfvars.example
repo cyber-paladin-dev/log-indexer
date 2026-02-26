@@ -1,0 +1,27 @@
+# Example terraform.tfvars file
+# Copy this to terraform.tfvars and update with your values
+
+aws_region = "us-west-2"
+environment = "dev"
+project_name = "log-indexer"
+
+vpc_cidr = "10.0.0.0/16"
+availability_zones = ["us-west-2a", "us-west-2b", "us-west-2c"]
+
+kubernetes_version = "1.28"
+
+node_groups = {
+  general = {
+    desired_size   = 2
+    min_size       = 1
+    max_size       = 4
+    instance_types = ["t3.medium"]
+  }
+}
+
+tags = {
+  Project     = "log-indexer"
+  Environment = "dev"
+  ManagedBy   = "terraform"
+  Owner       = "your-name"
+}

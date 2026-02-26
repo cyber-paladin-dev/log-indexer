@@ -76,6 +76,28 @@ make k8s-logs
 
 For detailed Kubernetes documentation, see [kubernetes/README.md](kubernetes/README.md).
 
+## Infrastructure Provisioning
+
+Provision cloud infrastructure with Terraform:
+```bash
+# Initialize Terraform
+make tf-init
+
+# Plan infrastructure changes
+make tf-plan
+
+# Apply infrastructure
+make tf-apply
+
+# View outputs
+make tf-output
+
+# Configure kubectl
+aws eks update-kubeconfig --region us-west-2 --name log-indexer-dev
+```
+
+For detailed Terraform documentation, see [infrastructure/terraform/README.md](infrastructure/terraform/README.md).
+
 ## Project Structure
 ```
 log-indexer/
